@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101411">
+<title>Fixed Gear Ratio Calculator</title>
+<style>
+:root{color-scheme:dark;--bg:#101411;--panel:#191f1b;--panel2:#202923;--line:#303b33;--muted:#9ba99e;--text:#f2f6f1;--accent:#b7f36b;--accent2:#d8ff9e}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 80% -15%,#30412c 0,transparent 38%),var(--bg);color:var(--text);font:15px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif}
+.wrap{max-width:1050px;margin:auto;padding:42px 22px 64px}.top{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:48px}.brand{font-size:13px;letter-spacing:.17em;font-weight:800}.brand span{color:var(--accent)}.tag{font-size:12px;color:var(--muted);border:1px solid var(--line);padding:7px 11px;border-radius:30px}
+.eyebrow{color:var(--accent);font-size:11px;letter-spacing:.2em;font-weight:800;text-transform:uppercase}.hero h1{font-size:clamp(36px,7vw,66px);line-height:.98;letter-spacing:-.055em;margin:13px 0 15px;max-width:720px}.hero p{color:var(--muted);max-width:560px;margin:0 0 32px}
+.layout{display:grid;grid-template-columns: .9fr 1.1fr;gap:16px}.panel{background:linear-gradient(145deg,#1c241e,#171d19);border:1px solid var(--line);border-radius:18px;padding:23px}.panel h2{font-size:16px;margin:0 0 20px;letter-spacing:-.02em}.fields{display:grid;grid-template-columns:1fr 1fr;gap:15px}.field{display:flex;flex-direction:column;gap:7px}.field.full{grid-column:1/-1}label{font-size:12px;color:var(--muted);font-weight:650}input,select{width:100%;background:#101612;color:var(--text);border:1px solid #39453b;border-radius:10px;padding:12px 13px;font:inherit;outline:none}input:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 3px #b7f36b20}.hint{font-size:11px;color:#7f8c82}.result{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}.metric{background:var(--panel2);border:1px solid var(--line);padding:17px;border-radius:13px}.metric small{display:block;color:var(--muted);font-size:11px;margin-bottom:5px}.metric strong{font-size:30px;letter-spacing:-.04em}.metric em{font-size:12px;color:var(--muted);font-style:normal}.ratio{padding:15px 17px;border-radius:13px;background:#b7f36b12;border:1px solid #b7f36b45;display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}.ratio span{color:var(--muted);font-size:12px}.ratio strong{font-size:20px;color:var(--accent2)}
+.skidbox{border:1px solid var(--line);border-radius:13px;padding:14px 16px;margin-bottom:13px;background:#111813}
+.skidtop{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.skidtop small{display:block;color:var(--muted);font-size:10px;letter-spacing:.1em;font-weight:750}
+.skidtop strong{display:block;color:var(--accent2);font-size:27px;line-height:1.2;margin-top:3px}
+.skidlabel{font-size:11px;color:var(--muted)}
+.skidtop.second{border-top:1px solid var(--line);margin-top:12px;padding-top:12px}
+.skidtop.second strong{font-size:20px;color:var(--text)}
+.skidbox p{font-size:11px;color:var(--muted);margin:12px 0 0}
+.table-head{display:flex;justify-content:space-between;align-items:center;margin:30px 0 12px}.table-head h2{font-size:18px;margin:0}.table-head span{font-size:12px;color:var(--muted)}.tablebox{overflow:auto;border:1px solid var(--line);border-radius:14px}table{width:100%;border-collapse:collapse;min-width:390px}th,td{text-align:right;padding:13px 16px;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}th:first-child,td:first-child{text-align:left}th{background:#1b231d;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.08em}td{font-size:14px}tbody tr:last-child td{border-bottom:0}tbody tr:hover{background:#ffffff08}.active{color:var(--accent);font-weight:750}.foot{display:flex;justify-content:space-between;gap:20px;color:var(--muted);font-size:11px;margin-top:15px}.note{margin-top:22px;color:var(--muted);font-size:12px}.note b{color:var(--text)}
+@media(max-width:760px){.wrap{padding:25px 15px 45px}.top{margin-bottom:38px}.layout{grid-template-columns:1fr}.panel{padding:19px}.hero p{font-size:14px}.foot{flex-direction:column;gap:5px}}
+</style>
+</head>
+<body>
+<main class="wrap">
+<header class="top"><div class="brand">FG<span>/</span>TOOLS</div><div class="tag">FIXED GEAR · GEARING TOOL</div></header>
+<section class="hero"><div class="eyebrow">Ride with the right ratio</div><h1>Fixed gear<br>ratio calculator.</h1><p>Dial in your drivetrain and see how each cadence translates into real-world speed.</p></section>
+<section class="layout">
+<div class="panel">
+<h2>01 / Drivetrain setup</h2>
+<div class="fields">
+<div class="field"><label for="chainring">CHAINRING · TEETH</label><input id="chainring" type="number" min="20" max="100" value="48"></div>
+<div class="field"><label for="cog">REAR COG · TEETH</label><input id="cog" type="number" min="9" max="30" value="17"></div>
+<div class="field full"><label for="tire">TIRE SIZE</label><select id="tire">
+<option value="2.105">700 × 23C</option><option value="2.136" selected>700 × 25C</option><option value="2.148">700 × 28C</option><option value="2.168">700 × 32C</option><option value="2.190">700 × 35C</option><option value="2.170">650B × 47</option><option value="2.050">26 × 1.5</option><option value="2.080">26 × 1.75</option><option value="2.110">26 × 1.95</option><option value="2.230">29 × 2.1</option><option value="custom">Custom circumference</option>
+</select></div>
+<div class="field full" id="customWrap" hidden><label for="circumference">WHEEL CIRCUMFERENCE · METRES</label><input id="circumference" type="number" min="1" max="3" step=".001" value="2.136"><span class="hint">Measure one full wheel rotation for the most accurate result.</span></div>
+</div>
+</div>
+<div class="panel">
+<h2>02 / Your gearing</h2>
+<div class="result">
+<div class="metric"><small>GEAR RATIO</small><strong id="ratio">2.82</strong><em> : 1</em></div>
+<div class="metric"><small>GEAR INCHES</small><strong id="gearInches">76.9</strong><em> in</em></div>
+</div>
+<div class="ratio"><span>Development · distance per crank revolution</span><strong id="development">6.02 m</strong></div>
+<div class="skidbox">
+  <div class="skidtop"><div><small>SKID PATCHES</small><strong id="skidPatches">17</strong></div><span class="skidlabel">one-foot skid</span></div>
+  <div class="skidtop second"><div><small>BOTH FEET</small><strong id="bothSkidPatches">34</strong></div><span class="skidlabel">alternating feet</span></div>
+  <p id="skidNote">17 unique rear-wheel skid positions when skidding with the same foot.</p>
+</div>
+<div class="hint">Higher ratio = more distance per pedal revolution, but requires more effort to accelerate.</div>
+</div>
+</section>
+<section class="table-head"><h2>Cadence / speed chart</h2><span>Estimated speed · km/h</span></section>
+<div class="tablebox"><table><thead><tr><th>Cadence</th><th>Speed (km/h)</th><th>Speed (mph)</th></tr></thead><tbody id="speedRows"></tbody></table></div>
+<div class="foot"><span>Cadence values: 60–140 RPM · 10 RPM steps</span><span id="summary">48T × 17T · 700 × 25C</span></div>
+<p class="note"><b>Calculation:</b> speed = cadence × gear ratio × wheel circumference × 60 ÷ 1,000. Actual speed can vary with tire pressure, tire wear, and measured wheel circumference.</p>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+const presets={};
+function calculate(){
+ const front=Number($('chainring').value), rear=Number($('cog').value);
+ const tire=$('tire').value, custom=tire==='custom';
+ $('customWrap').hidden=!custom;
+ const circumference=custom?Number($('circumference').value):Number(tire);
+ if(!Number.isFinite(front)||!Number.isFinite(rear)||front<=0||rear<=0||!Number.isFinite(circumference)||circumference<=0){$('speedRows').innerHTML='<tr><td colspan="3">Enter valid drivetrain values.</td></tr>';return}
+ const ratio=front/rear, development=ratio*circumference, wheelDiameter=circumference/Math.PI;
+ $('ratio').textContent=ratio.toFixed(2);
+ $('gearInches').textContent=(wheelDiameter*39.3701*ratio).toFixed(1);
+ $('development').textContent=development.toFixed(2)+' m';
+ const gcd=(a,b)=>b===0?a:gcd(b,a%b);
+ const oneFoot=rear/gcd(Math.round(front),Math.round(rear));
+ const bothFeet=oneFoot*2;
+ $('skidPatches').textContent=oneFoot;
+ $('bothSkidPatches').textContent=bothFeet;
+ $('skidNote').textContent=`${oneFoot} unique rear-wheel skid positions with the same foot; ${bothFeet} when alternating feet.`;
+ const rows=[];
+ for(let rpm=60;rpm<=140;rpm+=10){const kmh=rpm*development*60/1000;rows.push(`<tr><td>${rpm} <span class="hint">RPM</span></td><td class="${rpm===90?'active':''}">${kmh.toFixed(1)}</td><td>${(kmh/1.60934).toFixed(1)}</td></tr>`)}
+ $('speedRows').innerHTML=rows.join('');
+ const label=$('tire').selectedOptions[0].text;
+ $('summary').textContent=`${front}T × ${rear}T · ${custom?'Custom':label}`;
+}
+['chainring','cog','tire','circumference'].forEach(id=>$(id).addEventListener('input',calculate));
+calculate();
+</script>
+</body>
+</html>

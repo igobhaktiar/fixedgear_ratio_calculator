@@ -103,8 +103,8 @@ export default function App() {
           </div>
         </div>
         <h1>
-          <span className="h1-a">Track</span>
-          <span className="h1-b">stand</span>
+          <span className="h1-a">Brake</span>
+          <span className="h1-b">less</span>
         </h1>
         <p className="kicker">
           Fixed gear calculator<span> — ratio, skid patches, cadence. Know your gear before you lock your legs.</span>
@@ -233,6 +233,15 @@ export default function App() {
           for best results.
         </p>
         <p className="footer-tag">Ride fixed. Ride safe. Wear a lid.</p>
+        <a
+          className="signature"
+          href="https://www.instagram.com/igoback.exe/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span className="signature-by">built by</span>
+          <span className="signature-name">@igoback.exe</span>
+        </a>
       </footer>
     </>
   );

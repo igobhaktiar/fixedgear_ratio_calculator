@@ -867,6 +867,44 @@ button {
   letter-spacing: 0.02em;
 }
 
+/* author sticker */
+.signature {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  margin-top: 4px;
+  padding: 8px 16px;
+  border: 3px solid var(--ink);
+  border-radius: 999px;
+  background: var(--yellow);
+  color: var(--ink);
+  text-decoration: none;
+  box-shadow: var(--shadow-hard);
+  transform: rotate(-3deg);
+  transition: transform 0.25s cubic-bezier(0.3, 1.6, 0.5, 1), box-shadow 0.15s;
+}
+
+.signature:hover {
+  transform: rotate(2deg) scale(1.06);
+}
+
+.signature:active {
+  transform: translate(3px, 3px) rotate(0deg);
+  box-shadow: 2px 2px 0 #000;
+}
+
+.signature-by {
+  font: 700 0.7rem var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.signature-name {
+  font: 400 1.25rem/1 var(--font-display);
+  letter-spacing: 0.02em;
+}
+
 /* ───────── Small phones ───────── */
 @media (max-width: 400px) {
   .steppers {

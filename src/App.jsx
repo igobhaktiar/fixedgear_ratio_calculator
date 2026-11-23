@@ -233,15 +233,27 @@ export default function App() {
           for best results.
         </p>
         <p className="footer-tag">Ride fixed. Ride safe. Wear a lid.</p>
-        <a
-          className="signature"
-          href="https://www.instagram.com/igoback.exe/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <span className="signature-by">built by</span>
-          <span className="signature-name">@igoback.exe</span>
-        </a>
+        <div className="footer-stickers">
+          <a
+            className="signature"
+            href="https://www.instagram.com/igoback.exe/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span className="signature-by">built by</span>
+            <span className="signature-name">@igoback.exe</span>
+          </a>
+          <a
+            className="signature signature--support"
+            href="https://trakteer.id/igoback/tip"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Support Brakeless on Trakteer"
+          >
+            <span className="signature-by">support</span>
+            <span className="signature-name">Traktir cendol</span>
+          </a>
+        </div>
       </footer>
     </>
   );

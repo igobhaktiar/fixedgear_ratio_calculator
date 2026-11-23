@@ -905,6 +905,26 @@ button {
   letter-spacing: 0.02em;
 }
 
+.footer-stickers {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 16px;
+}
+
+.signature--support {
+  background: var(--pink);
+  transform: rotate(3deg);
+}
+
+.signature--support:hover {
+  transform: rotate(-2deg) scale(1.06);
+}
+
+.signature--support:active {
+  transform: translate(3px, 3px) rotate(0deg);
+}
+
 /* ───────── Small phones ───────── */
 @media (max-width: 400px) {
   .steppers {
